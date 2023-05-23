@@ -9,6 +9,8 @@
 	import { AppShell, AppBar, Avatar, Drawer, drawerStore, Toast } from '@skeletonlabs/skeleton';
 	import Navigation from '$lib/components/Navigation.svelte';
 
+	import { isSignedIn } from '$lib/auth/checkUser';
+
 	function drawerOpen(): void {
 		drawerStore.open();
 	}
@@ -33,12 +35,17 @@
 				</button>
 				<strong class="text-xl uppercase">Dreamteam Movie Reviews (Icon)</strong>
 			</svelte:fragment>
+
 			<svelte:fragment slot="trail">
-				<Avatar
-					src="https://media.licdn.com/dms/image/D4D03AQHRUsMBjjLx5w/profile-displayphoto-shrink_200_200/0/1670262924192?e=1690416000&v=beta&t=UwKnjhGCVuekMMko58r0_y3dJbwZkJW7tyyZAeS6vrA"
-					width="w-12"
-					rounded="rounded-full"
-				/>
+				{#if isSignedIn}
+					<Avatar
+						src="https://media.licdn.com/dms/image/D4D03AQHRUsMBjjLx5w/profile-displayphoto-shrink_200_200/0/1670262924192?e=1690416000&v=beta&t=UwKnjhGCVuekMMko58r0_y3dJbwZkJW7tyyZAeS6vrA"
+						width="w-12"
+						rounded="rounded-full"
+					/>
+				{:else}
+					<button class="btn variant-filled-secondary"> Sign up</button>
+				{/if}
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
